@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Classical Inheritance vs Modular Patterns - Francisco M&eacute;ndez Vilas</title>
+
+    <meta name="description" content="Classical Inheritance vs Modular Patterns slides by Francisco Mendez Vilas">
+    <meta name="author" content="Francisco Mendez Vilas">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- For grid system -->
+    <link rel="stylesheet" href="lib/css/960.css">
+    <!-- My presentation specific CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if( window.location.search.match( /print-pdf/gi ) ) {
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        }
+    </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <header>
+                        <h1>
+                        Classical Inheritance
+                        <br>
+                        vs
+                        <br>
+                        Modular Patterns
+                        </h1>
+                    </header>
+                    
+                    <article>
+                        <p class="fragment color-1 margin-top-big" data-fragment-index="1">Yes! In Javascript!</p>
+                    </article>
+                </section>
+
+
+
+                <section class="container_12">
+                    <header>
+                        <h1>Ola! Ke ase!</h1>
+                    </header>
+
+                    <article>
+                        <div class="align-left grid_10 push_2 margin-top-big">
+                            <img class="left" src="img/yo.jpg" style="margin: 0 1rem;">
+                            
+                            Francisco Méndez Vilas<br>
+                            <br>
+                            <a href="http://www.twitter.com/fmvilas">@fmvilas</a>
+                            <br>
+                            <a href="http://github.com/fmvilas">github.com/fmvilas</a>
+                            <br>
+                            <a href="http://plus.google.com/+FranciscoMendezVilas">+FranciscoMendezVilas</a>
+                        </div>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Today i'll speak about:</h1>
+                    </header>
+                    
+                    <article>
+                        <ul>
+                            <li class="fragment">Software Design Patterns (an overview)</li>
+                            <li class="fragment">Classical Inheritance</li>
+                            <li class="fragment">Prototypical Inheritance</li>
+                            <li class="fragment">Modular Patterns</li>
+                        </ul>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <article>
+                        <h1>So, let's start!</h1>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <blockquote>A design pattern is a general reusable solution to a commonly occurring problem within a given context in software design.<br>
+                            <div class="align-right text-small">- Wikipedia</div>
+                        </blockquote>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+                    
+                    <article>
+                        <p>Usually, patterns are grouped by:</p>
+                        <ul>
+                            <li class="fragment" data-fragment-index="0">Creational Patterns</li>
+                            <li class="fragment" data-fragment-index="1">Structural Patterns</li>
+                            <li class="fragment" data-fragment-index="2">Behavioral Patterns</li>
+                            <li class="fragment" data-fragment-index="3">Concurrency Patterns</li>
+                        </ul>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <blockquote class="fragment" data-fragment-index="0"><span class="highlight">Creational design patterns</span> are design patterns that deal with <span class="highlight">object creation</span> mechanisms, trying to create objects in a manner suitable to the situation.</blockquote>
+                        <blockquote class="fragment" data-fragment-index="1">The basic form of object creation could result in design problems or added complexity to the design.</blockquote>
+                        <blockquote class="fragment" data-fragment-index="2">Creational design patterns solve this problem by somehow controlling this object creation.</blockquote>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <p>Some examples of creational patterns are:</p>
+                        <ul>
+                            <li>Abstract Factory Pattern</li>
+                            <li>Factory Method Pattern</li>
+                            <li class="fragment visible-fragment" data-fragment-index="0">Prototype Pattern</li>
+                            <li>Singleton Pattern</li>
+                        </ul>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <pre><code data-trim class="javascript">
+var vehicle = {
+  getModel: function () {
+    console.log( "The model of this vehicle is.." + this.model );
+  }
+};
+ 
+var car = Object.create(vehicle, {
+  "id": {
+    value: MY_GLOBAL.nextId(),    
+    enumerable: true // writable:false, configurable:false by default
+  },
+ 
+  "model": {
+    value: "Ford",
+    enumerable: true
+  }
+});
+                        </code></pre>
+                        <p class="text-small">Prototype Pattern in JavaScript - Code example extracted from Addy Osmani's <a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#prototypepatternjavascript" target="_blank">Learning JavaScript Design Patterns</a> book.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <blockquote><span class="highlight">Structural design patterns</span> are design patterns that ease the design by identifying a simple way to realize <span class="highlight">relationships between entities</span> (i.e. classes or objects).</blockquote>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <p>Some examples of structural patterns are:</p>
+                        <ul>
+                            <li>Adapter Pattern</li>
+                            <li>Composite Pattern</li>
+                            <li class="fragment visible-fragment" data-fragment-index="0">Facade Pattern</li>
+                            <li>Decorator Pattern</li>
+                        </ul>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <pre><code data-trim class="javascript">
+var myModule = (function() {
+    
+    var _queryDOM = function() {
+        // your code here
+    };
+
+    var _renderMap = function() {
+        google.maps.render();
+    };
+
+    return {
+        queryDOM: _queryDOM,
+        renderMap: _renderMap
+    };
+
+})();
+
+myModule.renderMap();
+                        </code></pre>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <blockquote><span class="highlight">Behavioral design patterns</span> are design patterns that identify common <span class="highlight">communication</span> patterns between objects and realize these patterns. By doing so, these patterns increase flexibility in carrying out this communication.</blockquote>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <p>Some examples of behavioral patterns are:</p>
+                        <ul>
+                            <li>Chain of Responsibility Pattern</li>
+                            <li class="fragment visible-fragment" data-fragment-index="0">Observer a.k.a. Publish/Subscribe Pattern</li>
+                            <li>Mediator Pattern</li>
+                            <li>Memento Pattern</li>
+                        </ul>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <pre><code data-trim class="javascript">
+var myModule = function() {
+    ...
+    Observer.observe('dom.element.select', function(el) {
+        console.log('Element %s was selected.', el.getAttribute('id'));
+    });
+    ...
+};
+
+var anotherModule = function() {
+    ...
+    Observer.publish('dom.element.select', document.getElementById('anId'));
+    ...
+};
+                        </code></pre>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <blockquote><span class="highlight">Concurrency design patterns</span> are those types of design patterns that deal with the <span class="highlight">multi-threaded programming</span> paradigm.</blockquote>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Software Design Patterns</h1>
+                        <h2 class="text-medium text-no-transform">(an overview)</h2>
+                    </header>
+
+                    <article>
+                        <p>Some examples of behavioral patterns are:</p>
+                        <ul>
+                            <li>Active Object Pattern</li>
+                            <li>Monitor Object Pattern</li>
+                            <li>Scheduler Pattern</li>
+                            <li class="fragment visible-fragment" data-fragment-index="0">Reactor Pattern</li>
+                        </ul>
+                        <p class="fragment margin-top-big text-small_medium" data-fragment-index="0">This is the one used by <span class="highlight">Node.js</span>.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <article>
+                        <h1>Classical Inheritance</h1>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Classical Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">The Big Win</h2>
+                    </header>
+
+                    <article>
+                        <p class="highlight">Why classical inheritance succeeded that way?</p>
+                        <ul>
+                            <li class="fragment">It's easy to understand. <span class="fragment highlight">But, why?</span></li>
+                            <li class="fragment">Because you can solve problems by comparing them with daily life. <span class="fragment highlight">Think about it!</span></li>
+                            <li class="fragment">Classes are like molds to create objects. And these objects have properties, can make actions (methods) and things can happen to them (events).</li>
+                            <li class="fragment highlight">It's simply that! Just like real objects!</li>
+                            <li class="fragment">Well, not just like that but this way of thinking covers 90% of object oriented programming.</li>
+                        </ul>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Classical Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">The Big Win</h2>
+                    </header>
+
+                    <article>
+                        <p>...and then you think: "That's pretty nice Fran, but the slide title says <span class="highlight">Classical Inheritance</span>!"</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <article>
+                        <img id="promised-dont-cry" src="img/promiseddontcry.jpg">
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Classical Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">The Big Win</h2>
+                    </header>
+
+                    <article>
+                        <p>No, really. We all know how inheritance works.</p>
+                        <p class="fragment">You inherit properties from your parents.</p>
+                        <p class="fragment">But you don't make actions nor you react in a concrete way because you inherit it.</p>
+                        <p class="fragment">So, okay, it's not exactly as real life. <span class="highlight">It's even better</span>.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <article>
+                        <p class="text-medium">But, wait! Are these things exclusive for classical inheritance?</p>
+                        <p class="fragment text-big highlight">NO</p>
+                        <p class="fragment">It's object oriented programming.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Classical Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">JavaScript</h2>
+                    </header>
+
+                    <article>
+                        <p>But OOP is not only made of classical inheritance!</p>
+                        <p class="fragment">Remember the creational patterns?</p>
+                        <p class="fragment">We also have <span class="highlight">Prototypical Inheritance</span> (Prototype Pattern).</p>
+                        <p class="fragment">And now is when <span class="highlight">JavaScript</span> comes to the scene.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Classical Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">JavaScript</h2>
+                    </header>
+
+                    <article>
+                        <p>JavaScript is an object oriented language but not a Class-based object oriented language.</p>
+                        <p class="fragment">It's a <span class="highlight">Prototype-based</span> object oriented language.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Classical Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">JavaScript</h2>
+                    </header>
+
+                    <article>
+                        <p>It means that <span class="highlight">there are no classes</span> in JavaScript.</p>
+                        <p class="fragment">Everything is an object and objects have prototypes which, at the same time are objects.</p>
+                        <p class="fragment highlight text-big">WTF!</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1><span class="fragment visible-fragment strikethrough">Classical</span> Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">JavaScript</h2>
+                    </header>
+
+                    <article>
+                        <p><span class="highlight">That's it!</span> You can simulate classes with <span class="highlight">Function</span>'s objects but they are not, and the primary evidence is that you can modify these "classes" at runtime, which is completely the opposite to the definition of a <span class="highlight">Class</span>.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">JavaScript</h2>
+                    </header>
+
+                    <article>
+                        <p>What we have in JavaScript is Prototypical Inheritance.</p>
+                        <p class="fragment highlight">Let's see an example!</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                    </header>
+
+                    <article>
+                        <pre><code data-trim class="javascript">
+var Animal = {
+    bornIn: Date.now,
+    
+    eat: function() {
+        console.log('Eating...');
+    }
+};
+
+var Dog = function() {
+    this.bark = function() {
+        console.log('Guau!');
+    };
+
+    this.bornIn = new Date(this.bornIn());
+};
+
+Dog.prototype = Animal;
+
+var myDog = new Dog();
+
+myDog.eat(); // Outputs: Eating...
+myDog.bark(); // Outputs: Guau!
+console.log(myDog.bornIn); // Outputs something like: Tue Jun 17...
+                        </code></pre>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                    </header>
+
+                    <article>
+                        <p class="margin-bottom-medium">Let's explain it step by step.</p>
+                        <div>
+                            <pre><code data-trim class="javascript">
+var Animal = {
+    bornIn: Date.now, // That's a reference to the built-in function
+    
+    eat: function() {
+        console.log('Eating...');
+    }
+};
+
+...
+                            </code></pre>
+                        </div>
+                        <p class="fragment margin-top-medium"><code class="highlight">Animal</code> will have two functions, <code class="highlight">bornIn()</code> and <code class="highlight">eat()</code>.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                    </header>
+
+                    <article>
+                        <div>
+                            <pre><code data-trim class="javascript">
+...
+var Dog = function() {
+    // Here, "this" will point to the newly created instance,
+    // not to Dog itself.
+    this.bark = function() {
+        console.log('Guau!');
+    };
+
+    // That's called 'property shadowing'
+    this.bornIn = new Date(this.bornIn());
+};
+...
+                            </code></pre>
+                        </div>
+                    </article>
+                    <p class="margin-top-medium">Notice the "<code class="highlight">this.bornIn = ...</code>" line. At the time of creating a Dog instance, <code class="highlight">this.bornIn</code> refers to <code class="highlight">Animal.bornIn</code> but, after this line, it will be "hidden" with an own property with the same name. We can still have a reference to <code class="highlight">Animal.bornIn</code> through <code class="highlight">Dog.prototype.bornIn</code>.</p>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                    </header>
+
+                    <article>
+                        <div>
+                            <pre><code data-trim class="javascript">
+Dog.prototype = Animal;
+                            </code></pre>
+                        </div>
+                    </article>
+                    <p class="margin-top-medium">That's the key part. Here we are telling to JavaScript that, when creating a new Dog, our instance should have <span class="highlight">a reference</span> to the properties and methods of Animal. <span class="fragment highlight">But how?</span></p>
+                    <p class="fragment">By inspecting the prototype chain.</p>
+                    <p class="fragment highlight">Proto... WHAAAT?</p>
+                    <p class="fragment">Let's continue with the example.</p>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                    </header>
+
+                    <article>
+                        <div>
+                            <pre><code data-trim class="javascript">
+var myDog = new Dog();
+                            </code></pre>
+                        </div>
+                    </article>
+                    <p class="margin-top-medium">Here we are creating an instance of a Dog. <span class="fragment">Let's dig inside the resulting object.</span></p>
+                    <pre class="fragment"><code data-trim class="javascript">
+// console.dir(myDog);
+{
+    bark: function () { ... }
+    bornIn: Tue Jun 1... // A Date instance
+    __proto__: Object
+}
+                    </code></pre>
+                    <p class="fragment">Where is the <code class="highlight">eat</code> function? <span class="fragment">In the <code class="highlight">__proto__</code> object.</span></p>
+                    <p class="fragment">Here, <code class="highlight">__proto__</code>, is a reference to the <code class="highlight">Animal</code> object, and JavaScript looks into it to search for inherited members, such as the <code class="highlight">eat</code> function.</p>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                    </header>
+
+                    <article>
+                    <pre><code data-trim class="javascript">
+// console.dir(myDog);
+{
+    bark: function () { ... },
+    bornIn: Tue Jun 1..., // Our own bornIn function
+    __proto__: {
+        bornIn: function now() { [native code] },
+        eat: function () { ... },
+        __proto__: Object
+    }
+}
+                    </code></pre>
+                    <p>Because of this we can do something like <code class="highlight">myDog.eat()</code>.</p>
+                    <p class="fragment">And notice the two <code class="highlight">bornIn</code> functions. The second one is the <code class="highlight">Animal.bornIn</code> function.</p>
+                    <p class="fragment">And also notice the second <code class="highlight">__proto__</code>. It's a reference to the native <code class="highlight">Object.prototype</code>.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                    </header>
+
+                    <article>
+                    <pre><code data-trim class="javascript">
+// console.dir(myDog);
+{
+    bark: function () { ... },
+    bornIn: Tue Jun 1..., // Our own bornIn function
+    __proto__: {
+        bornIn: function now() { [native code] },
+        eat: function () { ... },
+        __proto__: Object
+    }
+}
+                    </code></pre>
+                    <p>So, the prototype chain looks like this:</p>
+                    <p><code class="highlight">Dog</code> --> <code class="highlight">Animal</code> --> <code class="highlight">Object</code> --> <code class="highlight">null</code></p>
+                    <p class="fragment">Yes, an instance of a native <code class="highlight">Object</code> has no prototype because it's the first one in the chain. And, if you check for the <code class="highlight">__proto__</code> property, it exists, but you will get a <code class="highlight">null</code> value.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">Performance</h2>
+                    </header>
+
+                    <article>
+                        <p>Now that you know how inheritance works in JavaScript, you must take care of the prototype chain, because it's as <span class="highlight">powerful</span> as <span class="highlight">dangerous</span>.</p>
+                        <p class="fragment">Try to not make large chains. It will give your app a better performance.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Prototypical Inheritance</h1>
+                        <h2 class="text-medium text-no-transform">Why we should not imitate Classical Inheritance in Javascript?</h2>
+                    </header>
+
+                    <article>
+                        <p>I know it's hard, because almost all developers come from Class-based languages, but I guarantee you that using prototypes will give you more power and flexibility while developing.</p>
+                        <p class="fragment"><span class="highlight">Prototypes are dynamic, Classes are static.</span> Prototypes can change during runtime but it could also be a problem if you don't develop carefully.</p>
+                        <p class="fragment">But the main reason to <span class="highlight">don't use classes</span> is that <span class="highlight">JavaScript doesn't have Classes</span> and trying to imitate it will cause a loss of performance and you will also lose the good parts of using prototypes.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <article>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">AMD, CommonJS, etc.</h2>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Introduction</h2>
+                    </header>
+
+                    <article>
+                        <p>In a short, <span class="highlight">Modular Patterns</span> dictates how to structure our code, namely in modules that are <span class="highlight">reusable pieces</span> and let us develop <span class="highlight">loose coupled</span> applications.</p>
+                        <p class="fragment">In JavaScript there are, primarily, 3 modular patterns definitions:</p>
+                        <ul>
+                            <li class="fragment">AMD (Asyncrhonous Module Definition)</li>
+                            <li class="fragment">CommonJS</li>
+                            <li class="fragment">ES Harmony</li>
+                        </ul>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Introduction</h2>
+                    </header>
+
+                    <article>
+                        <p>It's important to note that, in the current iteration of JavaScript (ECMA-262), it's impossible to define modules without the need of a script loader.</p>
+                        <p class="fragment">Fortunately, the next version, <span class="highlight">JavaScript Harmony</span> is coming and it's already available in some environments, such as <span class="highlight">Node.js</span>.</p>
+                        <p class="fragment">In the meantime we can use nice script loader libraries like <span class="highlight">RequireJS</span> and <span class="highlight">curl.js</span>.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Lego</h2>
+                    </header>
+
+                    <article>
+                        <img id="lego" class="right" src="img/lego.jpg">
+                        <p>I always recommend to start thinking in modules as Lego pieces.</p>
+                        <p class="fragment">By themselves, they are so simple but, by combining them, you can create amazing things.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Facade</h2>
+                    </header>
+
+                    <article>
+                        <p class="highlight">Remember the Facade pattern?</p>
+                        <p class="fragment">It defines the way the pieces connect each other.</p>
+                        <p class="fragment">And by controlling it we can maintain our application <span class="highlight">loose-coupled</span>.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Loose Coupling</h2>
+                    </header>
+
+                    <article>
+                        <p class="highlight">What are the benefits of loose-coupling?</p>
+                        <p class="fragment">You can easily reuse your modules everywhere in the application or even outside it.</p>
+                        <p class="fragment">If a module changes or crashes, the application could continue working and you only lose the features of these modules.</p>
+                        <p class="fragment">And testing! It's easier to test a simple module than testing the whole application.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Loose Coupling</h2>
+                    </header>
+
+                    <article>
+                        <p class="highlight">How modular patterns help with this?</p>
+                        <p class="fragment">We remove unnecessary dependecies.</p>
+                        <p class="fragment">The truly needed <span class="highlight">dependencies are well defined</span> and, if you don't define them, your code will not work.</p>
+                        <p class="fragment">We can use optimizers like <span class="highlight">r.js</span> to maintain it clean and controlled.</p>
+                        <p class="fragment">We can have <span class="highlight">different versions</span> of the same module running in our application. Say, i.e. some module needs jQuery 1.x and another one needs jQuery 2.x.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Communicating Modules</h2>
+                    </header>
+
+                    <article>
+                        <p class="highlight">Remember the Observer pattern?</p>
+                        <p class="fragment">By subscribing and publishing messages we can have our application decoupled and well communicated.</p>
+                        <p class="fragment">Messages are like events, but the difference is that events are attached to objects while messages are not. They can live on their own.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Is Classical Inheritance dead?</h2>
+                    </header>
+
+                    <article>
+                        <p class="fragment">Of course not.</p>
+                        <p class="fragment">Classical Inheritance, or its emulation in JS, has its own niche. Sometimes the application performance is not critical and you can benefit from the expertise about Class-based thinking of your team.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Is Classical Inheritance dead?</h2>
+                    </header>
+
+                    <article>
+                        <p class="highlight">Are Modular Patterns and Classical Inheritance compatible?</p>
+                        <p class="fragment">Yes, they are!</p>
+                        <p class="fragment highlight">Is this architecture the best way of structuring your app?</p>
+                        <p class="fragment">The answer is: "It depends".</p>
+                        <p class="fragment">Depends on your app needs.</p>
+                    </article>
+                </section>
+
+
+
+                <section>
+                    <header>
+                        <h1>Modular Patterns</h1>
+                        <h2 class="text-medium text-no-transform">Is Classical Inheritance dead?</h2>
+                    </header>
+
+                    <article>
+                        <p>Module Patterns define a way to organize your code but, it's important to note that inside a module you can create objects, or define multiple "classes" or just create a "class" inheriting from another one defined in another module.</p>
+                        <p class="fragment">What I want to emphasize is that it's not a battle between Classical Inheritance and Module Patterns. <span class="highlight">They don't play in the same league</span>.</p>
+                        <p class="fragment">So, after all...</p>
+                    </article>
+                </section>
+
+
+
+                <section data-transition="fade">
+                    <article>
+                        <h1>
+                        Classical Inheritance
+                        <br>
+                        vs
+                        <br>
+                        Modular Patterns
+                        </h1>
+                    </article>
+                </section>
+
+
+
+                <section data-transition="fade">
+                    <article>
+                        <h1>
+                        Classical Inheritance
+                        <br>
+                        and
+                        <br>
+                        Modular Patterns
+                        </h1>
+                    </article>
+                </section>
+
+
+
+                <section data-transition="fade">
+                    <article>
+                        <h1>Hope you liked it!</h1>
+                        <h1 class="fragment">Thank you!</h1>
+                    </article>
+                </section>
+
+            </div>
+
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.min.js"></script>
+
+        <script>
+
+            // Full list of configuration options available here:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                //transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+                // Parallax scrolling
+                // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                // parallaxBackgroundSize: '2100px 900px',
+
+                // Optional libraries used to extend on reveal.js
+                dependencies: [
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+                ]
+            });
+
+        </script>
+
+    </body>
+    </html>
